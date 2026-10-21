@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KaveenH | Social media that moves people</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0b20;--bg2:#181135;--bg3:#1f1845;--ink:#f6f1ff;--mut:#a79ec9;--line:rgba(246,241,255,.10);
+  --pink:#ff3d81;--blue:#4d6bff;--sun:#ffc93c;--card:rgba(255,255,255,.045);
+  --display:'Bricolage Grotesque','Arial Black',Impact,sans-serif;--body:'DM Sans',system-ui,-apple-system,Segoe UI,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){
+  --bg:#f7f4ff;--bg2:#efe9ff;--bg3:#e6deff;--ink:#161029;--mut:#5b5084;--line:rgba(22,16,41,.12);--card:rgba(22,16,41,.04);}}
+:root[data-theme="dark"]{--bg:#0f0b20;--bg2:#181135;--bg3:#1f1845;--ink:#f6f1ff;--mut:#a79ec9;--line:rgba(246,241,255,.10);--card:rgba(255,255,255,.045);}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px);height:auto}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+h1,h2,h3{font-family:var(--display);line-height:1.02;margin:0;letter-spacing:-.025em}
+h2{font-size:clamp(34px,5.4vw,64px);font-weight:800}
+p{margin:0}
+section{padding:110px 0}
+.glow{position:fixed;width:420px;height:420px;border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(circle,rgba(255,61,129,.18),transparent 65%);transform:translate(-50%,-50%);left:50%;top:30%;transition:left .25s,top .25s}
+header{position:fixed;inset:0 0 auto 0;z-index:50;padding-top:env(safe-area-inset-top,0px);
+  background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:49;background:var(--bg)}
+nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font:800 24px var(--display);letter-spacing:-.04em;display:flex;align-items:center;gap:8px}
+.logo i{width:20px;height:20px;border-radius:50%;border:5px solid var(--pink);border-right-color:var(--sun);display:inline-block;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.links{display:flex;gap:30px;align-items:center;font-weight:500;color:var(--mut)}
+.links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;font-weight:700;border:0;cursor:pointer;font-size:16px;font-family:var(--body);
+  background:var(--pink);color:#fff;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px -8px var(--pink)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.ghost:hover{box-shadow:none;border-color:var(--ink)}
+.menu{display:none;background:none;border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:8px 12px;font-size:15px;cursor:pointer}
+
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding:130px 0 70px;position:relative;z-index:1;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-20%;right:-10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(77,107,255,.15),transparent 70%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-20%;left:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,201,60,.10),transparent 70%);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;position:relative;z-index:1}
+.hero h1{font-size:clamp(46px,8.2vw,108px);font-weight:800}
+.hero h1 span{display:block;background:linear-gradient(95deg,var(--pink),var(--sun));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{margin:26px 0 34px;max-width:480px;color:var(--mut);font-size:19px}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.stage{position:relative;height:540px;perspective:900px}
+.post{position:absolute;width:210px;border-radius:22px;padding:14px;background:var(--bg2);border:1px solid var(--line);
+  box-shadow:0 30px 60px -25px rgba(0,0,0,.55);animation:rise .9s cubic-bezier(.2,.8,.2,1) both,bob 7s ease-in-out infinite;will-change:transform}
+.post .art{height:170px;border-radius:14px;display:grid;place-items:center;font:800 44px var(--display);color:#fff}
+.post small{display:flex;justify-content:space-between;margin-top:10px;color:var(--mut);font-size:13px}
+.post b{color:var(--ink)}
+.p1{left:2%;top:4%;--r:-7deg}.p1 .art{background:linear-gradient(135deg,#ff3d81,#ff8a3d)}
+.p2{right:0;top:20%;--r:6deg;animation-delay:.15s,.15s}.p2 .art{background:linear-gradient(135deg,#4d6bff,#7b3dff)}
+.p3{left:20%;bottom:2%;--r:-3deg;animation-delay:.3s,.3s}.p3 .art{background:linear-gradient(135deg,#ffc93c,#ff6a3d);color:#2a1300}
+@keyframes rise{from{opacity:0;transform:translateY(60px) rotate(var(--r))}to{opacity:1;transform:translateY(0) rotate(var(--r))}}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -14px}}
+.bubble{position:absolute;padding:9px 16px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:700;font-size:14px;animation:bob 5s ease-in-out infinite;box-shadow:0 10px 30px -8px rgba(0,0,0,.4)}
+.b1{right:6%;top:2%}.b2{left:0;bottom:30%;animation-delay:1s}
+
+/* marquee */
+.marq{border-block:1px solid var(--line);overflow:hidden;padding:20px 0;position:relative;z-index:1;background:var(--bg2)}
+.track{display:flex;gap:56px;width:max-content;animation:slide 28s linear infinite;font:700 26px var(--display);color:var(--mut)}
+.track span::after{content:"✦";margin-left:56px;color:var(--pink)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative;z-index:1}
+.stat{border-top:2px solid var(--pink);padding-top:18px}
+.stat b{display:block;font:800 clamp(40px,5vw,64px) var(--display);letter-spacing:-.03em}
+.stat span{color:var(--mut)}
+
+/* services */
+.sv{position:relative;z-index:1}
+.head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:52px}
+.head p{max-width:420px;color:var(--mut)}
+.grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.svc{padding:36px;border-radius:28px;background:var(--card);border:1px solid var(--line);position:relative;overflow:hidden;transition:transform .25s,border-color .25s,background .25s}
+.svc:hover{transform:translateY(-6px);border-color:var(--pink);background:var(--bg2)}
+.svc::after{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:var(--c);opacity:.28;filter:blur(35px);transition:opacity .3s}
+.svc:hover::after{opacity:.45}
+.svc h3{font-size:30px;margin-bottom:12px}
+.svc p{color:var(--mut);max-width:440px}
+.svc ul{list-style:none;padding:0;margin:20px 0 0;display:flex;gap:8px;flex-wrap:wrap}
+.svc li{padding:5px 14px;border-radius:999px;border:1px solid var(--line);font-size:14px;color:var(--mut)}
+
+/* work */
+.work{position:relative;z-index:1;background:var(--bg2)}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:34px}
+.chip{padding:10px 20px;border-radius:999px;border:1.5px solid var(--line);background:none;color:var(--ink);font:500 15px var(--body);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.chip:hover{border-color:var(--mut)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pc{border:0;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer;border-radius:26px;overflow:hidden;background:var(--bg);border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
+.pc:hover{transform:translateY(-8px);box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.pc .vis{height:220px;position:relative;display:grid;place-items:center;overflow:hidden;background:var(--bg3)}
+.pc .vis img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:transform .5s ease}
+.pc:hover .vis img{transform:scale(1.08)}
+.pc .vis::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(15,11,32,.85) 0%,rgba(15,11,32,.2) 50%,transparent 100%);z-index:1}
+.pc .vis em{font:800 52px var(--display);font-style:normal;color:#fff;letter-spacing:-.04em;z-index:2;text-shadow:0 6px 30px rgba(0,0,0,.5);position:relative}
+.pc .info{padding:24px 26px 28px}
+.pc .info small{color:var(--mut);font-size:13px;letter-spacing:.02em}
+.pc h3{font-size:24px;margin:6px 0 16px}
+.pc .m{display:flex;gap:26px}
+.pc .m b{font:800 22px var(--display);display:block}
+.pc .m span{font-size:13px;color:var(--mut)}
+
+/* modal */
+dialog{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:30px;padding:0;width:min(860px,100% - 30px);max-height:88vh;overflow:auto}
+dialog::backdrop{background:rgba(8,4,22,.72);backdrop-filter:blur(6px)}
+dialog[open]{animation:pop .35s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{from{opacity:0;transform:translateY(30px) scale(.94)}}
+.mv{height:240px;display:grid;place-items:center;font:800 90px var(--display);color:#fff;letter-spacing:-.04em;position:relative;overflow:hidden}
+.mv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45}
+.mv span{position:relative;z-index:1;text-shadow:0 6px 30px rgba(0,0,0,.5)}
+.mb{padding:34px 38px 40px}
+.mb h3{font-size:38px;margin:4px 0 22px}
+.mb .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:28px}
+.mb h4{margin:0 0 6px;font:700 17px var(--display);color:var(--sun)}
+.mb p{color:var(--mut);font-size:15.5px}
+.mb .res{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.mb .res div{padding:18px;border-radius:18px;background:var(--card);border:1px solid var(--line)}
+.mb .res b{font:800 34px var(--display);display:block}
+.x{position:absolute;right:16px;top:16px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(0,0,0,.45);color:#fff;font-size:20px;cursor:pointer;z-index:3;backdrop-filter:blur(4px)}
+dialog{position:fixed}
+
+/* process */
+.proc{position:relative;z-index:1}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s}
+.step{padding:30px 26px;border-radius:26px;border:1px solid var(--line);background:var(--card);counter-increment:s;transition:transform .25s,border-color .25s}
+.step:hover{transform:translateY(-4px);border-color:var(--blue)}
+.step::before{content:counter(s);display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--pink);color:#fff;font:800 20px var(--display);margin-bottom:22px}
+.step:nth-child(2)::before{background:var(--blue)}.step:nth-child(3)::before{background:var(--sun);color:#2a1300}.step:nth-child(4)::before{background:var(--ink);color:var(--bg)}
+.step h3{font-size:24px;margin-bottom:10px}.step p{color:var(--mut);font-size:15.5px}
+
+/* contact */
+.contact{position:relative;z-index:1;padding-bottom:90px}
+.box{border-radius:40px;padding:70px 50px;text-align:center;background:linear-gradient(135deg,var(--pink),var(--blue));color:#fff;position:relative;overflow:hidden}
+.box::before{content:"";position:absolute;top:-50%;right:-10%;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.12);pointer-events:none}
+.box::after{content:"";position:absolute;bottom:-40%;left:-5%;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.08);pointer-events:none}
+.box h2{max-width:800px;margin:0 auto 18px;position:relative;z-index:1}
+.box p{max-width:520px;margin:0 auto 32px;opacity:.92;position:relative;z-index:1}
+.box .btn{background:#fff;color:#1a1238;position:relative;z-index:1}
+.box .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+.box .cta{justify-content:center;position:relative;z-index:1}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:30px 0 40px;color:var(--mut);font-size:15px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+footer a:hover{color:var(--ink)}
+.socials{display:flex;gap:14px;align-items:center}
+.socials a{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);color:var(--mut);transition:color .2s,border-color .2s,transform .2s,background .2s}
+.socials a:hover{color:var(--ink);border-color:var(--pink);background:var(--card);transform:translateY(-3px)}
+.socials svg{width:18px;height:18px;display:block;fill:currentColor}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr}.stage{height:440px}
+  .grid4,.cards,.steps{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}
+  .mb .cols,.mb .res{grid-template-columns:1fr}
+  .links a:not(.btn){display:none}.menu{display:none}
+  section{padding:80px 0}.box{padding:52px 24px}
+}
+@media (max-width:620px){.grid4,.cards,.steps{grid-template-columns:1fr}.post{width:170px}.post .art{height:130px}.stage{height:420px}.mb{padding:26px 22px}.cards{gap:18px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="glow" id="glow"></div>
+<header><div class="wrap"><nav>
+  <a class="logo" href="#top"><i></i>KaveenH</a>
+  <div class="links"><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a class="btn" href="#contact">Start a project</a></div>
+</nav></div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+  <div>
+    <h1>We make brands <span>impossible to scroll past.</span></h1>
+    <p class="lead">KaveenH is a social media marketing agency. We plan, shoot, post and promote, so your audience stops, watches and buys.</p>
+    <div class="cta"><a class="btn" href="#work">See our work</a><a class="btn ghost" href="#contact">Book a free call</a></div>
+  </div>
+  <div class="stage" id="stage" aria-hidden="true">
+    <div class="post p1"><div class="art">Reels</div><small><b>12.4K likes</b><span>2h ago</span></small></div>
+    <div class="post p2"><div class="art">Ads</div><small><b>4.8x ROAS</b><span>Live</span></small></div>
+    <div class="post p3"><div class="art">Viral</div><small><b>1.2M views</b><span>Trending</span></small></div>
+    <div class="bubble b1">+38K followers</div><div class="bubble b2">Sold out in 3 days</div>
+  </div>
+</div></div>
+
+<div class="marq" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<section><div class="wrap stats">
+  <div class="stat"><b data-n="48" data-s="+">0</b><span>Brands grown</span></div>
+  <div class="stat"><b data-n="12" data-s="M+">0</b><span>Organic views created</span></div>
+  <div class="stat"><b data-n="4.6" data-s="x" data-d="1">0</b><span>Average return on ad spend</span></div>
+  <div class="stat"><b data-n="96" data-s="%">0</b><span>Clients who stay with us</span></div>
+</div></section>
+
+<section class="sv" id="services"><div class="wrap">
+  <div class="head"><h2>Everything your<br>feed needs.</h2><p>One team for strategy, content and paid growth, so every post works toward a result.</p></div>
+  <div class="grid4">
+    <div class="svc" style="--c:var(--pink)"><h3>Social strategy</h3><p>Audience research, a content plan and a clear voice, built around what your customers already watch.</p><ul><li>Audits</li><li>Content calendars</li><li>Competitor study</li></ul></div>
+    <div class="svc" style="--c:var(--blue)"><h3>Short video and content</h3><p>Reels, TikToks and Shorts that hook in the first second. Scripted, shot and edited in house.</p><ul><li>Reels</li><li>Photo shoots</li><li>Motion graphics</li></ul></div>
+    <div class="svc" style="--c:var(--sun)"><h3>Paid ads</h3><p>Meta and TikTok campaigns tested weekly and scaled on the creatives that earn their budget.</p><ul><li>Meta ads</li><li>TikTok ads</li><li>Retargeting</li></ul></div>
+    <div class="svc" style="--c:var(--pink)"><h3>Brand and community</h3><p>Identity, tone of voice and daily community management that turns followers into regulars.</p><ul><li>Branding</li><li>Influencer reach</li><li>Community care</li></ul></div>
+  </div>
+</div></section>
+
+<section class="work" id="work"><div class="wrap">
+  <div class="head"><h2>Work that<br>moved the numbers.</h2><p>Open any project to see the challenge, what we did and what changed.</p></div>
+  <div class="chips" id="chips" role="group" aria-label="Filter projects"></div>
+  <div class="cards" id="cards"></div>
+</div></section>
+
+<section class="proc" id="process"><div class="wrap">
+  <div class="head"><h2>How we work.</h2><p>A simple loop that keeps getting better the longer we work together.</p></div>
+  <div class="steps">
+    <div class="step"><h3>Listen</h3><p>We learn your product, your customers and your goals in a short discovery call.</p></div>
+    <div class="step"><h3>Plan</h3><p>You get a strategy and a 30 day content calendar you can read in ten minutes.</p></div>
+    <div class="step"><h3>Create</h3><p>We shoot, edit, write and publish, with your approval before anything goes live.</p></div>
+    <div class="step"><h3>Grow</h3><p>Monthly reports show what worked. We double down on it and drop the rest.</p></div>
+  </div>
+</div></section>
+
+<section class="contact" id="contact"><div class="wrap"><div class="box">
+  <h2>Ready to be the brand everyone’s sharing?</h2>
+  <p>Tell us about your business. We’ll reply within a day with ideas for your first month.</p>
+  <div class="cta">
+    <a class="btn" id="wa" href="https://wa.me/94757603995" target="_blank" rel="noopener">Chat on WhatsApp</a>
+    <a class="btn ghost" href="mailto:kaveenhansithx@gmail.com">kaveenhansithx@gmail.com</a>
+  </div>
+</div></div></section>
+</main>
+<footer><div class="wrap">
+  <span>© 2026 KaveenH. All rights reserved.</span>
+  <div class="socials">
+    <a href="https://www.instagram.com/kavee.xz/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.12 1.38A5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.12.66.66 1.33 1.07 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.12-1.38.66-.66 1.07-1.33 1.38-2.12.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.12A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.4-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg>
+    </a>
+    <a href="https://www.youtube.com/@KaveenX" target="_blank" rel="noopener" aria-label="YouTube">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@kaveen.xz" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.3 0 .58.05.85.13V9.4a6.33 6.33 0 0 0-5.94 10.62 6.33 6.33 0 0 0 10.86-4.43V8.5a8.16 8.16 0 0 0 4.34 1.24V6.69Z"/></svg>
+    </a>
+  </div>
+</div></footer>
+
+<dialog id="dlg" aria-label="Project details"><button class="x" id="close" aria-label="Close">✕</button><div id="dbody"></div></dialog>
+
+<script>
+var P=[
+{k:"Food and drink",n:"Brew Bros Coffee",t:"Café chain",g:"#ff7a3d,#ff3d81",i:"BB",
+ img:"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80",
+ ch:"A local café group had good coffee and almost no online presence outside its own neighbourhood.",
+ st:"We built a daily Reels series around the baristas, launched a signature drink with a countdown, and ran geo-targeted offers within 5 km of each shop.",
+ r:[["+212%","Follower growth"],["3.1M","Reel views"],["+64%","Weekend footfall"]]},
+{k:"Fashion",n:"Threadline Studio",t:"Clothing label",g:"#4d6bff,#7b3dff",i:"TL",
+ img:"https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=600&q=80",
+ ch:"A new streetwear label needed its first 1,000 customers without a big launch budget.",
+ st:"We shaped a limited drop model, filmed behind-the-scenes content with creators, and ran a retargeting funnel from teaser to checkout.",
+ r:[["4.8x","Return on ad spend"],["Sold out","First drop in 3 days"],["38K","New followers"]]},
+{k:"Fitness",n:"IronPulse Gym",t:"Fitness studio",g:"#ffc93c,#ff6a3d",i:"IP",
+ img:"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80",
+ ch:"Memberships dipped every year after January, and the gym relied on walk-ins.",
+ st:"We launched a 30 day transformation challenge, turned member stories into short videos, and ran lead ads with a free trial week.",
+ r:[["+410","New members in 60 days"],["€0.9","Cost per lead"],["2.4M","Organic reach"]]},
+{k:"Beauty",n:"Glowfold Skin",t:"Skincare brand",g:"#ff3d81,#b43dff",i:"GF",
+ img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=600&q=80",
+ ch:"A skincare start-up had strong products but weak trust with new buyers.",
+ st:"We built a creator seeding programme, a routine-based content series and a review-led ad set featuring real customers.",
+ r:[["+155%","Online sales"],["62","Creators activated"],["5.2x","Return on ad spend"]]},
+{k:"Real estate",n:"Skyline Homes",t:"Property developer",g:"#2fd1c5,#4d6bff",i:"SH",
+ img:"https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80",
+ ch:"A developer needed qualified buyers for a new apartment launch, not just likes.",
+ st:"We produced cinematic walkthrough videos, ran a lead-gen campaign with a virtual tour and set up a WhatsApp follow-up flow.",
+ r:[["380","Qualified leads"],["31","Units reserved"],["-47%","Cost per lead"]]},
+{k:"Tech",n:"Nova Learn App",t:"Education app",g:"#7b3dff,#ff3d81",i:"NL",
+ img:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80",
+ ch:"An education app was stuck at low downloads and a high drop-off after install.",
+ st:"We tested thirty short-form creatives, found the three hooks that worked, and rebuilt the onboarding story in ads and organic posts.",
+ r:[["52K","App installs"],["-38%","Cost per install"],["1.2M","Views on top video"]]}
+];
+var tags=["All"].concat(P.map(function(p){return p.k}).filter(function(v,i,a){return a.indexOf(v)===i}));
+var chips=document.getElementById("chips"),cards=document.getElementById("cards"),dlg=document.getElementById("dlg"),db=document.getElementById("dbody");
+function draw(f){
+  cards.innerHTML="";
+  P.forEach(function(p,idx){
+    if(f!=="All"&&p.k!==f)return;
+    var b=document.createElement("button");b.className="pc";b.setAttribute("aria-label","Open "+p.n);
+    b.innerHTML='<div class="vis"><img src="'+p.img+'" alt="'+p.n+'" loading="lazy"><em>'+p.i+'</em></div><div class="info"><small>'+p.t+' · '+p.k+'</small><h3>'+p.n+'</h3><div class="m"><div><b>'+p.r[0][0]+'</b><span>'+p.r[0][1]+'</span></div><div><b>'+p.r[1][0]+'</b><span>'+p.r[1][1]+'</span></div></div></div>';
+    b.onclick=function(){open(idx)};cards.appendChild(b);
+  });
+}
+function open(i){
+  var p=P[i];
+  db.innerHTML='<div class="mv" style="background:linear-gradient(135deg,'+p.g+')"><img src="'+p.img+'" alt=""><span>'+p.i+'</span></div><div class="mb"><small style="color:var(--mut)">'+p.t+' · '+p.k+'</small><h3>'+p.n+'</h3><div class="cols"><div style="grid-column:span 1"><h4>The challenge</h4><p>'+p.ch+'</p></div><div style="grid-column:span 2"><h4>What we did</h4><p>'+p.st+'</p></div></div><div class="res">'+p.r.map(function(x){return '<div><b>'+x[0]+'</b><p>'+x[1]+'</p></div>'}).join("")+'</div></div>';
+  dlg.showModal();
+}
+tags.forEach(function(t){
+  var c=document.createElement("button");c.className="chip";c.textContent=t;c.setAttribute("aria-pressed",t==="All");
+  c.onclick=function(){[].forEach.call(chips.children,function(x){x.setAttribute("aria-pressed","false")});c.setAttribute("aria-pressed","true");draw(t)};
+  chips.appendChild(c);
+});
+draw("All");
+document.getElementById("close").onclick=function(){dlg.close()};
+dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close()});
+/* marquee */
+var words=["Instagram","TikTok","Facebook","YouTube","LinkedIn","Pinterest","Snapchat","X"],tr=document.getElementById("track"),h="";
+for(var k=0;k<4;k++)words.forEach(function(w){h+="<span>"+w+"</span>"});tr.innerHTML=h;
+/* counters */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(!e.isIntersecting)return;io.unobserve(e.target);
+  var el=e.target,n=parseFloat(el.dataset.n),d=+el.dataset.d||0,t0=performance.now();
+  (function f(t){var q=Math.min((t-t0)/1400,1),v=n*(1-Math.pow(1-q,3));el.textContent=v.toFixed(d)+(q===1?el.dataset.s:"");if(q<1)requestAnimationFrame(f)})(t0);
+})},{threshold:.6});
+[].forEach.call(document.querySelectorAll("[data-n]"),function(el){io.observe(el)});
+/* pointer glow + hero parallax */
+var gl=document.getElementById("glow"),stg=document.getElementById("stage");
+addEventListener("pointermove",function(e){gl.style.left=e.clientX+"px";gl.style.top=e.clientY+"px";
+  if(stg){var x=(e.clientX/innerWidth-.5)*2,y=(e.clientY/innerHeight-.5)*2;
+  [].forEach.call(stg.querySelectorAll(".post"),function(p,i){p.style.transform="translate("+(x*(10+i*6))+"px,"+(y*(8+i*5))+"px)"})}});
+</script>
+</body>
+</html>
